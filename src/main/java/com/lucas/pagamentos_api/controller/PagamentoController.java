@@ -53,6 +53,12 @@ public class PagamentoController {
                 return ResponseEntity.badRequest().body(
                         Map.of("error", "Número do cartão não deve ser informado para boleto ou pix."));
             }
+
+            if ((p.getMetodoPagamento().equals("boleto") || p.getMetodoPagamento().equals("pix")
+                    || p.getMetodoPagamento().equals("cartao_credito")) && p.getCodigoDebito() != null) {
+                return ResponseEntity.badRequest().body(
+                        Map.of("error", "Não é necessário o código débito."));
+            }
         }
 
         List<Pagamento> entidades = pagamentos.stream().map(dto -> {
