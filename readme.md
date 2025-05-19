@@ -110,7 +110,10 @@ http://localhost:8080
 
 ### 🔹 Buscar Pagamento por ID
 
-- **GET** `/pagamentos/{id}`
+- **GET**
+`/pagamentos?codigoDebito={:codigoDebito}`
+`/pagamentos/identificadorPagador={:identificadorPagador}`
+`/pagamentos/status={:status}`
 
 ---
 
@@ -120,9 +123,13 @@ http://localhost:8080
 - **Body (JSON)**:
 ```json
 {
-  "valor": 200.00,
-  "formaPagamento": "PIX",
-  "descricao": "Pagamento atualizado"
+  "status": "PENDENTE_PROCESSAMENTO"
+}
+{
+  "status": "PROCESSADO_FALHA"
+}
+{
+  "status": "PROCESSADO_SUCESSO"
 }
 ```
 
@@ -147,7 +154,6 @@ src/
      │    └── service/
      └── resources/
           ├── application.properties
-          └── data.sql (opcional)
 ```
 
 ---
@@ -158,7 +164,3 @@ src/
 - Validações são aplicadas automaticamente via anotação (`@Valid`) nos DTOs.
 
 ---
-
-## 📫 Contato
-
-Caso tenha dúvidas ou sugestões, entre em contato por [seuemail@exemplo.com].
