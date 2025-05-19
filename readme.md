@@ -163,8 +163,4 @@ src/
 - Todos os dados são armazenados em memória e se perdem ao reiniciar a aplicação.
 - Validações são aplicadas automaticamente via anotação (`@Valid`) nos DTOs.
 
-<<<<<<< HEAD
 ---
-=======
----
->>>>>>> 624d8a5fc0e88df752f010ece17267aba1b5b4de
