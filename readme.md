@@ -79,7 +79,7 @@ http://localhost:8080
 		"codigoDebito": 1,
 		"identificadorPagador": "00000000000",
 		"metodoPagamento": "cartao_debito",
-		"numeroCartao": "5285870333718642",
+		"numeroCartao": "1234567891234567",
 		"valor": 99.99,
 		"status": "PENDENTE_PROCESSAMENTO",
 		"ativo": true
@@ -89,7 +89,7 @@ http://localhost:8080
 		"codigoDebito": 1,
 		"identificadorPagador": "00000000000",
 		"metodoPagamento": "cartao_debito",
-		"numeroCartao": "5285870333718642",
+		"numeroCartao": "1234567891234567",
 		"valor": 100,
 		"status": "PROCESSADO_FALHA",
 		"ativo": true
@@ -98,7 +98,7 @@ http://localhost:8080
 		"id": 3,
 		"identificadorPagador": "00000000000",
 		"metodoPagamento": "cartao_credito",
-		"numeroCartao": "5285870333718642",
+		"numeroCartao": "1234567891234567",
 		"valor": 299.99,
 		"status": "PROCESSADO_SUCESSO",
 		"ativo": true
@@ -124,7 +124,7 @@ http://localhost:8080
 
 ### 🔹 Atualizar Pagamento
 
-- **PUT** `/pagamentos/{id}`
+- **PUT** `/pagamentos/{:id}`
 - **Body (JSON)**:
 ```json
 {
@@ -142,7 +142,7 @@ http://localhost:8080
 
 ### 🔹 Deletar Pagamento
 
-- **DELETE** `/pagamentos/{id}`
+- **DELETE** `/pagamentos/{:id}`
 
 ---
 
@@ -151,10 +151,11 @@ http://localhost:8080
 ```
 src/
  └── main/
-     ├── java/com/seuprojeto/
+     ├── java/com/lucas/pagamentos-api
+     │    ├── config/
      │    ├── controller/
      │    ├── dto/
-     │    ├── entity/
+     │    ├── models/
      │    ├── repository/
      │    └── service/
      └── resources/
