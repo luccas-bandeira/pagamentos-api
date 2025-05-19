@@ -147,7 +147,6 @@ src/
      │    └── service/
      └── resources/
           ├── application.properties
-          └── data.sql (opcional)
 ```
 
 ---
@@ -158,7 +157,3 @@ src/
 - Validações são aplicadas automaticamente via anotação (`@Valid`) nos DTOs.
 
 ---
-
-## 📫 Contato
-
-Caso tenha dúvidas ou sugestões, entre em contato por [seuemail@exemplo.com].
