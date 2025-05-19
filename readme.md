@@ -108,11 +108,16 @@ http://localhost:8080
 
 ---
 
-### 🔹 Buscar Pagamento por ID
+### 🔹 Filtrar Pagamentos
 
 - **GET**
+### codigoDebito:
 `/pagamentos?codigoDebito={:codigoDebito}`
+
+### identificadorPagador:
 `/pagamentos/identificadorPagador={:identificadorPagador}`
+
+### status:
 `/pagamentos/status={:status}`
 
 ---
