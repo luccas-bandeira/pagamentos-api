@@ -1,16 +1,17 @@
 package com.lucas.pagamentos_api.controller;
 
+import com.lucas.pagamentos_api.models.Pagamento;
+import com.lucas.pagamentos_api.service.PagamentoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import com.lucas.pagamentos_api.dto.PagamentoDTO;
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
-import com.lucas.pagamentos_api.models.Pagamento;
 import com.lucas.pagamentos_api.repository.PagamentoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("/pagamentos")
@@ -18,10 +19,17 @@ public class PagamentoController {
 
     @Autowired
     private PagamentoRepository repository;
+    @Autowired
+    private PagamentoService pagamentoService;
 
     @GetMapping
-    public List<Pagamento> listarPagamentos() {
-        return repository.findAll();
+    public ResponseEntity<List<Pagamento>> listarPagamentos(
+            @RequestParam(required = false) Integer codigoDebito,
+            @RequestParam(required = false) String identificadorPagador,
+            @RequestParam(required = false) String status,
+            @RequestParam(required = false) Integer id) {
+        List<Pagamento> resultados = pagamentoService.filtrarPagamentos(codigoDebito, identificadorPagador, status, id);
+        return ResponseEntity.ok(resultados);
     }
 
     @Autowired
@@ -45,19 +53,19 @@ public class PagamentoController {
             if ((p.getMetodoPagamento().equals("cartao_credito") || p.getMetodoPagamento().equals("cartao_debito"))
                     && (p.getNumeroCartao() == null || p.getNumeroCartao().isBlank())) {
                 return ResponseEntity.badRequest().body(
-                        Map.of("error", "Número do cartão é obrigatório para pagamentos com cartão."));
+                        Map.of("error", "numeroCartao é obrigatório para pagamentos com cartão."));
             }
 
             if ((p.getMetodoPagamento().equals("boleto") || p.getMetodoPagamento().equals("pix"))
                     && p.getNumeroCartao() != null && !p.getNumeroCartao().isBlank()) {
                 return ResponseEntity.badRequest().body(
-                        Map.of("error", "Número do cartão não deve ser informado para boleto ou pix."));
+                        Map.of("error", "numeroCartao não deve ser informado para boleto ou pix."));
             }
 
             if ((p.getMetodoPagamento().equals("boleto") || p.getMetodoPagamento().equals("pix")
                     || p.getMetodoPagamento().equals("cartao_credito")) && p.getCodigoDebito() != null) {
                 return ResponseEntity.badRequest().body(
-                        Map.of("error", "Não é necessário o código débito."));
+                        Map.of("error", "Não é necessário o codigoDebito."));
             }
         }
 

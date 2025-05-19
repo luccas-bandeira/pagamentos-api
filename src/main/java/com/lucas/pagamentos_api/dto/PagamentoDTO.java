@@ -5,7 +5,6 @@ import java.util.List;
 
 public class PagamentoDTO {
 
-    @NotNull(message = "codigoDebito é obrigatório")
     private Integer codigoDebito;
 
     @NotBlank(message = "identificadorPagador é obrigatório")
